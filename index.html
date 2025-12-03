@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Optimization Meta Tags -->
+    <title>Sk Danish Tanvir: Songwriter Portfolio - "Blue Door"</title>
+    <meta name="description"
+        content="Official songwriter portfolio of Sk Danish Tanvir, featuring the lyrics for 'Blue Door' and the creative inspiration behind the song. NO AI was used in the writing process.">
+    <meta name="keywords"
+        content="Sk Danish Tanvir, Blue Door, songwriter, lyrics, original song, music portfolio, Jim Morrison, Billie Eilish, Freddie Mercury, Mr. Crowley">
+    <meta name="author" content="Sk Danish Tanvir">
+
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font family -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+        /* Apply primary font */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            /* Dark background for a sophisticated look */
+        }
+
+        /* Use Playfair Display for titles/headings to give a literary feel */
+        .title-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Custom animation for lyric sections */
+        .lyric-line {
+            opacity: 0;
+            /* Reduced transition time for a snappier feel */
+            transform: translateY(10px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        .lyric-line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom scrollbar styling (optional, for aesthetics) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #161b22;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #238636;
+            border-radius: 4px;
+        }
+
+        /* --- Custom Door Styling and Animation --- */
+        .blue-door-svg {
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+            /* Initial 3D appearance */
+            transform: perspective(1000px) rotateY(0deg);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.7);
+            /* Blue glow */
+            border-radius: 8px;
+            /* CRITICAL: Set the hinge point to the left edge (5% of width) */
+            transform-origin: 5% 50%;
+        }
+
+        .blue-door-svg:hover {
+            transform: perspective(1000px) rotateY(5deg) scale(1.05);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 1);
+        }
+
+        /* Class added by JS to simulate opening from the left hinge */
+        .door-open {
+            /* Swings open 110 degrees, giving a dramatic open look */
+            transform: perspective(1000px) rotateY(-110deg) scale(1.1);
+            transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.9);
+        }
+
+        /* Message Box Styling */
+        .door-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 200;
+            padding: 2rem;
+            max-width: 90vw;
+            width: 400px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 3px solid #3b82f6;
+            color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.8);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .door-message.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body class="text-gray-200 antialiased leading-relaxed">
+
+    <!-- Header Section (Fixed/Sticky for navigation) -->
+    <header class="sticky top-0 z-50 bg-black/80 backdrop-blur-sm shadow-lg border-b border-green-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="title-font text-2xl font-bold text-green-400">Sk Danish Tanvir</h1>
+            <nav class="space-x-4 hidden sm:block">
+                <a href="#lyrics" class="text-gray-300 hover:text-green-400 transition duration-300">Lyrics</a>
+                <a href="#backstory" class="text-gray-300 hover:text-green-400 transition duration-300">Backstory</a>
+                <a href="#inspiration"
+                    class="text-gray-300 hover:text-green-400 transition duration-300">Inspiration</a>
+            </nav>
+            <div id="mobile-menu-button"
+                class="sm:hidden cursor-pointer p-2 rounded-lg hover:bg-green-700/30 transition duration-300">
+                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </div>
+        </div>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden sm:hidden bg-black/90 p-4 border-t border-green-700/50">
+            <a href="#lyrics" class="block py-2 text-gray-300 hover:text-green-400 transition duration-300">Lyrics</a>
+            <a href="#backstory"
+                class="block py-2 text-gray-300 hover:text-green-400 transition duration-300">Backstory</a>
+            <a href="#inspiration"
+                class="block py-2 text-gray-300 hover:text-green-400 transition duration-300">Inspiration</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Hero Section -->
+        <section class="text-center mb-20 pt-10">
+            <h2 class="title-font text-6xl sm:text-7xl lg:text-8xl font-extrabold text-white mb-4 animate-pulse-slow">
+                Blue Door
+            </h2>
+            <p class="text-green-400 text-xl sm:text-2xl font-light italic mb-6">
+                — A Songwriting Portfolio —
+            </p>
+            <p class="text-gray-400 text-lg">
+                <span class="font-bold text-green-500">Written by:</span> Sk Danish Tanvir
+            </p>
+            <!-- Updated NO AI Text Size and Emphasis -->
+            <div
+                class="mt-8 inline-block px-6 py-3 rounded-full bg-red-800/50 text-red-300 border-4 border-red-500 font-mono text-xl sm:text-2xl lg:text-3xl shadow-2xl font-extrabold tracking-wider">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline-block mr-2" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M18.364 5.636l-3.85 3.85m0 0a1.5 1.5 0 11-2.121-2.121m2.121 2.121L12 12m2.879 2.879a1.5 1.5 0 012.12-2.12L15 12l2.879 2.879a1.5 1.5 0 01-2.121 2.121m0 0L5.636 18.364m12.728-12.728a9 9 0 010 12.728m-12.728-12.728a9 9 0 000 12.728" />
+                </svg>
+                NO AI was USED in the creative process of writing this song
+            </div>
+        </section>
+
+        <!-- Lyrics Section -->
+        <section id="lyrics" class="mb-20">
+            <h3 class="title-font text-5xl font-bold mb-10 text-center text-green-400 border-b-2 border-green-700 pb-4">
+                The Lyrics
+            </h3>
+
+            <div id="lyric-container" class="max-w-3xl mx-auto text-lg space-y-4">
+                <!-- ACT I: The Fairy Queen (Updated) -->
+                <div class="text-xl font-semibold title-font text-green-300 mt-8 mb-4">ACT I: The Fairy Queen</div>
+
+                <p class="lyric-line">"Well, I was nine and she was fifteen,</p>
+                <p class="lyric-line">Singin' so bright for a kid in her teen,</p>
+                <p class="lyric-line">A saint in some backroad dream.</p>
+                <p class="lyric-line">Baby, you made the whole world lean,</p>
+                <p class="lyric-line">Baby Girl singin' like my fairy Queen.</p>
+
+                <p class="lyric-line mt-6">Pull the moon down with its silver neck,</p>
+                <p class="lyric-line">My whole world to shake,</p>
+                <p class="lyric-line">I can't hold the Brake,</p>
+                <p class="lyric-line">And I stay awake.</p>
+                <p class="lyric-line">I couldn't hold me back,</p>
+
+                <p class="lyric-line mt-6">Fell in love with the songs,</p>
+                <p class="lyric-line">Hangin' off a runaway shack.</p>
+                <p class="lyric-line">When the sun sank low, we'd ride the stars.</p>
+                <p class="lyric-line">Couldn't hold myself together—</p>
+                <p class="lyric-line">Fell for those songs like it's bad weather.</p>
+
+                <p class="lyric-line mt-6">You see strange colours—</p>
+                <p class="lyric-line">Can you feel it my girl?</p>
+
+                <p class="lyric-line mt-6">The sky wasn't blue,</p>
+                <p class="lyric-line">Nor Jim wasn't brown.</p>
+                <p class="lyric-line">In strawberry field, strummed some crooked guitar,</p>
+                <p class="lyric-line">She rode the horses, dreaming so far.</p>
+                <p class="lyric-line">How can you see different with blue gaze?</p>
+                <p class="lyric-line">Said you learned that trick in your wildchild days.</p>
+                <p class="lyric-line">Slept playing a broken sitar.</p>
+
+                <p class="lyric-line mt-6">Morning came and she wasn't there,</p>
+                <p class="lyric-line">Just a kid again, hand to the speaker.</p>
+                <p class="lyric-line">You kept losing all your friends,</p>
+                <p class="lyric-line">The way you lost me—</p>
+                <p class="lyric-line text-red-400 font-mono">And I'm eighteen looking back.</p>
+
+                <p class="lyric-line mt-6 text-gray-400">Well, she don't know my name,</p>
+                <p class="lyric-line text-gray-400">All your fans can might be same.</p>
+                <p class="lyric-line text-gray-400">So much fame, I'm so lame.</p>
+
+                <p class="lyric-line mt-6">But I know you feel my fever,</p>
+                <p class="lyric-line">Sing 'bout me</p>
+                <p class="lyric-line text-green-500 font-mono">—So a random Stranger</p>
+                <p class="lyric-line">In a way she'll never admit.</p>
+                <p class="lyric-line">God—</p>
+
+                <p class="lyric-line mt-6">You melt me like sugar under heat,</p>
+                <p class="lyric-line">And every time you breathe,</p>
+                <p class="lyric-line">Little soul you take.</p>
+                <p class="lyric-line">So much I love her—</p>
+                <p class="lyric-line">God how I want her—</p>
+                <p class="lyric-line">Mama's sad girl.</p>
+
+                <p class="lyric-line mt-6">When I'm far from you, baby,</p>
+                <p class="lyric-line">Somehow happier than ever.</p>
+                <p class="lyric-line">Lighter than birds of a feather.</p>
+                <p class="lyric-line">Oh you Blind girl.</p>
+
+                <p class="lyric-line mt-6">Why the lights go flicker?</p>
+                <p class="lyric-line">Why does life taste so bitter?</p>
+
+                <p class="lyric-line mt-6">Girl, you twist my hunger,</p>
+                <p class="lyric-line">Fix me with a shunter,</p>
+                <p class="lyric-line">Tear me into thunder,</p>
+                <p class="lyric-line">Hold me under wonder....</p>
+                <p class="lyric-line">And I adore you</p>
+                <p class="lyric-line">Far than I should've.</p>
+
+                <p class="lyric-line mt-6 title-font text-2xl font-bold text-green-400">And I tryyyy-aiiii-eiii...</p>
+                <p class="lyric-line title-font text-2xl font-bold text-green-400">Love, I try.</p>
+
+                <p class="lyric-line mt-6">Swear I'm not telling a lie—</p>
+                <p class="lyric-line">I'm not a bad guy.</p>
+
+                <p class="lyric-line mt-6">I rot my brain, got no blood, not a stain,</p>
+                <p class="lyric-line">Try not to say your name</p>
+                <p class="lyric-line">'Till I go insane.</p>
+                <p class="lyric-line">Pulled me up so pain,</p>
+                <p class="lyric-line">Hit by a falling crane,</p>
+                <p class="lyric-line">Runnin’ all over rain</p>
+                <p class="lyric-line">After Shear and strain.</p>
+                <p class="lyric-line">My goal is you, main—</p>
+                <p class="lyric-line">Burning in my brain</p>
+                <p class="lyric-line">Like I see you in the frame,</p>
+                <p class="lyric-line">Simple, never lame.</p>
+
+                <p class="lyric-line mt-6">Oh, how I love her—</p>
+                <p class="lyric-line">But my eyes go so blur.</p>
+                <p class="lyric-line">Who the hell you man,</p>
+                <p class="lyric-line">You broke my shelter.</p>
+                <p class="lyric-line">When I saw you in paps’ flash,</p>
+                <p class="lyric-line">With the other guy, I'm trash.</p>
+
+                <p class="lyric-line mt-6 title-font text-2xl font-bold text-red-400">"Baby... I'm so trash."</p>
+
+                <p class="lyric-line mt-6">Love you 'till I dieeeee,</p>
+                <p class="lyric-line">Love you 'till I dieeeee,</p>
+
+                <p class="lyric-line mt-6">When the world won't be mine.</p>
+                <p class="lyric-line">Even if I'm offline</p>
+                <p class="lyric-line">Won't let you be mine.</p>
+                <p class="lyric-line">Bored of so much of trying</p>
+                <p class="lyric-line">Won’t you to more shine</p>
+                <p class="lyric-line">Still won't let you be mine.</p>
+
+                <p class="lyric-line mt-6">Love you 'till I dieeeee,</p>
+                <p class="lyric-line">Love you 'till I dieeeee,</p>
+                <p class="lyric-line">Baby I'm still falling</p>
+                <p class="lyric-line">Past the warning signs.</p>
+                <p class="lyric-line">I'm well off, but not on the Breadline.</p>
+
+                <!-- ACT II: Introduction of Conflict (Mr. Crowley) (Updated) -->
+                <div class="text-xl font-semibold title-font text-red-500 mt-12 mb-4 border-t border-red-700 pt-4">ACT
+                    II: Mr. Crowley</div>
+                <p class="lyric-line">Ah! What I see there,</p>
+                <p class="lyric-line">Girl you know the man, who lives here.</p>
+                <p class="lyric-line">He was always there.</p>
+                <p class="lyric-line">Old Mr. Crowley,</p>
+                <p class="lyric-line">He's my neighbour,</p>
+                <p class="lyric-line">Found laying cold under that corridor—</p>
+                <p class="lyric-line">Behind that door.</p>
+
+                <p class="lyric-line mt-6 title-font text-2xl font-bold text-red-400">The Killer, I'm sure.</p>
+
+                <p class="lyric-line mt-6">Was it the lights went off?</p>
+                <p class="lyric-line text-red-400 font-mono">(Coughing)</p>
+                <p class="lyric-line">My terror stuck in my cough.</p>
+
+                <p class="lyric-line mt-6">He owned the sky, that wicked buyer,</p>
+                <p class="lyric-line">Killed the bird, then claimed he's higher—</p>
+                <p class="lyric-line">Said the world was fine, "no war, no fire,"</p>
+                <p class="lyric-line">He shut me up—with a wire.</p>
+
+                <p class="lyric-line mt-6">He called our struggle a Joke.</p>
+                <p class="lyric-line">Rejected the child,</p>
+                <p class="lyric-line">Man who kills the wild.</p>
+                <p class="lyric-line">He's a clown,</p>
+                <p class="lyric-line">Followed orders from another clown.</p>
+                <p class="lyric-line">The man of Red Lights</p>
+                <p class="lyric-line">Gets profits from the fights.</p>
+                <p class="lyric-line">There's a duck, I say who the fuck.</p>
+                <p class="lyric-line text-red-400 font-mono">(Still I kept getting Bombed)</p>
+
+                <p class="lyric-line mt-6">So I called the ones who love me,</p>
+                <p class="lyric-line">Told them, "I'm alright, don't worry."</p>
+                <p class="lyric-line">My life is smaller</p>
+                <p class="lyric-line">Since I know her.</p>
+                <p class="lyric-line">My mom, my father—</p>
+                <p class="lyric-line">God, they deserve so better.</p>
+                <p class="lyric-line">I'm getting colder,</p>
+                <p class="lyric-line">Wish I could hold her,</p>
+                <p class="lyric-line">And I think it's over,</p>
+                <p class="lyric-line">Lord only you could bring her</p>
+                <p class="lyric-line">Into my bloodstream.</p>
+                <p class="lyric-line">And now I can't leave her (now).</p>
+
+                <p class="lyric-line mt-6">Old Mr. Crowley, he's my neighbour,</p>
+                <p class="lyric-line">Found laying cold under the corridor—</p>
+                <p class="lyric-line">Behind that door.</p>
+
+                <p class="lyric-line mt-6 title-font text-2xl font-bold text-red-400">The Killer, I'm sure.</p>
+
+                <!-- ACT III: The Confrontation / The End (Updated) -->
+                <div class="text-xl font-semibold title-font text-green-500 mt-12 mb-4 border-t border-green-700 pt-4">
+                    ACT III: The End</div>
+                <p class="lyric-line">But Crowley wasn't just a man,</p>
+                <p class="lyric-line">Chase him down the sun.</p>
+                <p class="lyric-line title-font text-3xl font-extrabold text-green-400">Run Run Run Run</p>
+                <p class="lyric-line title-font text-3xl font-extrabold text-green-400">Run Run Run Runnnnn</p>
+                <p class="lyric-line">Heartbeat pacing—</p>
+                <p class="lyric-line">All embarrassing.</p>
+
+                <p class="lyric-line mt-6">Knife ain't killing,</p>
+                <p class="lyric-line">Water spilling,</p>
+                <p class="lyric-line">Self-fulfilling</p>
+                <p class="lyric-line title-font text-3xl font-extrabold text-green-400">Thing.</p>
+
+                <!-- OUTRO (Updated) -->
+                <div class="text-xl font-semibold title-font text-blue-400 mt-12 mb-4 border-t border-blue-700 pt-4">
+                    Outro</div>
+                <p class="lyric-line text-red-400">"Crowley dies."</p>
+                <p class="lyric-line text-red-400">"Crowley cries.</p>
+                <p class="lyric-line text-red-400">Crowley burns in electric fire.</p>
+                <p class="lyric-line text-red-400">And I kill the ghost."</p>
+                <p class="lyric-line text-green-400">"Oh Man,</p>
+                <p class="lyric-line text-green-400">Crowley killed the child,</p>
+                <p class="lyric-line text-green-400">And I save the wild.</p>
+                <p class="lyric-line">A soft click,</p>
+                <p class="lyric-line">Like a record needle lifting.</p>
+                <p class="lyric-line">The story pauses on an empty groove,</p>
+                <p class="lyric-line">And the lights in my room</p>
+                <p class="lyric-line title-font text-4xl font-extrabold text-blue-400">Blink once,</p>
+                <p class="lyric-line title-font text-4xl font-extrabold text-blue-400">Twice,</p>
+                <p class="lyric-line title-font text-4xl font-extrabold text-blue-400">Hello</p>
+                <p class="lyric-line text-gray-500">—No Answer.</p>
+                <p class="lyric-line text-gray-500">Is anyone there?</p>
+                <p class="lyric-line title-font text-2xl font-extrabold text-red-500">The world is at the end, My
+                    Friend.</p>
+                <p class="lyric-line mt-6">Then settle into</p>
+                <p class="lyric-line">A gentle</p>
+                <p class="lyric-line title-font text-5xl font-extrabold text-blue-400">Blue</p>
+                <p class="lyric-line title-font text-5xl font-extrabold text-blue-400">Horizon.</p>
+            </div>
+        </section>
+
+        <!-- Backstory & Meaning -->
+        <section id="backstory" class="mb-20 bg-gray-800/50 p-8 rounded-xl shadow-2xl border border-gray-700">
+            <h3 class="title-font text-5xl font-bold mb-8 text-center text-green-400">
+                Backstory & Meaning
+            </h3>
+            <div class="max-w-4xl mx-auto text-lg text-gray-300 space-y-6">
+                <p>
+                    "The story is about me. A boy so much obsessed with his favourite female pop star, Billie Eilish. I
+                    have grown up listening to Billie and I feel deeply connected to her lyrics and vocals. I was so
+                    obsessed with her, and at the moment I realised that I couldn’t reach her, I became mad. And I
+                    killed my past inner self, Mr Crowley, for what I wasn’t able to reach in her.
+
+                    Mr Crowley is the representation of all the bad things happening around the world right now (war,
+                    political greed, pollution harming our mother nature, and the people who try to steal freedom of
+                    speech from others). We are in a bad moment of time — maybe the worst time in history — where we
+                    need to come together and fight against the darkness.
+                    "
+                </p>
+                <p class="text-xs text-gray-500 italic text-center pt-4">
+                    (Note: All of this is purely fiction… nothing except my madness for Billie is real. Any resemblance
+                    to real persons, living or dead, or actual events is purely coincidental. We are living in difficult
+                    times, and I hope these problems will be resolved in the coming years. I hate war.)
+                </p>
+            </div>
+        </section>
+
+        <!-- Inspiration & Credits Section -->
+        <section id="inspiration" class="mb-20">
+            <h3 class="title-font text-5xl font-bold mb-8 text-center text-green-400 border-b-2 border-green-700 pb-4">
+                Inspiration & Deepest Gratitude
+            </h3>
+            <div
+                class="max-w-4xl mx-auto text-lg text-gray-300 space-y-6 bg-gray-800/50 p-8 rounded-xl shadow-2xl border border-gray-700">
+                <p class="text-xl font-semibold text-white">
+                    Although the entire song is written by me (<span class="text-red-400 font-bold">NO AI was USED in
+                        the creative process of writing this song</span>), I would love to say the names my favourite
+                    artists
+                    who inspired me to write this. I also want to express my deepest gratitude to the people who became
+                    my teachers from afar. I have never met them in real life. But they inspired me more than anyone
+                    else in the world.
+                </p>
+
+                <p class="title-font text-3xl font-bold text-green-400 pt-4">
+                    The Inspirations
+                </p>
+                <ul class="list-disc list-inside space-y-2 pl-4">
+                    <li class="hover:text-green-300 transition duration-300">Freddie Mercury</li>
+                    <li class="hover:text-green-300 transition duration-300">Bob Dylan</li>
+                    <li class="hover:text-green-300 transition duration-300">Paul McCartney</li>
+                    <li class="hover:text-green-300 transition duration-300">John Lennon</li>
+                    <li class="hover:text-green-300 transition duration-300">Billie Eilish & Finneas</li>
+                    <li class="hover:text-green-300 transition duration-300">Jim Morrison</li>
+                    <li class="hover:text-green-300 transition duration-300">Lana Del Rey</li>
+                    <li class="hover:text-green-300 transition duration-300">Roger Waters</li>
+                    <li class="hover:text-green-300 transition duration-300">Ozzy Osbourne</li>
+                </ul>
+
+                <p class="title-font text-2xl font-bold text-white pt-4">
+                    The Creative Narrative
+                </p>
+                <p>
+                    I had this idea in my mind to write something for you, Billie, as a super fan. And that's why I
+                    wrote this. For the narrative of the song, I was inspired by "Got To Get You Into My Life" (since my
+                    song also starts as a Beatles like love song). Then it shifts to a bitter sorrowful voice. That’s
+                    when I introduce Mr. Crowley as the symbol of corruption, all the bad things around the world
+                    happening right now (war, political greed, pollution harming our mother nature, and about the people
+                    who try to steal freedom of speech from others). Here, my biggest inspiration took over. The act 3
+                    of the song was inspired by the tone of Jim Morrison from my all time fav song "The End".
+                </p>
+                <p>
+                    At first, the introduction of Mr Crowley felt out of place while writing. But then one song came to
+                    my mind: "Bohemian Rhapsody" - the song that taught me to write whatever I want, as long as it’s
+                    meaningful and true to what I’m trying to express.
+                </p>
+                <p class="text-xl font-bold text-green-400 italic pt-4">
+                    And once again… I wrote this for you, Billie! You!! Thank you for helping me through my darkest days
+                    with your fairy like lyrics..
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer/Credits Section -->
+    <footer class="bg-black/50 border-t border-green-700/50 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+            <!-- Hidden Crowley Message (Hover to Reveal) -->
+            <p id="crowley-message"
+                class="text-sm text-transparent hover:text-red-400 transition-all duration-700 cursor-default mb-2 select-none font-mono">
+                "Mr. Crowley, won't you ride your white horse down?"
+            </p>
+
+            <p class="text-sm text-gray-500">
+                &copy; <span id="current-year"></span> Sk Danish Tanvir. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- CONTACTS SECTION -->
+    <section id="contacts" class="mb-20">
+        <h3 class="title-font text-5xl font-bold mb-8 text-center text-blue-400 border-b-2 border-blue-700 pb-4">
+            Get In Touch
+        </h3>
+        <div
+            class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 p-8 rounded-xl shadow-2xl bg-gray-800/50 border border-gray-700">
+
+            <!-- Contact Item: Email -->
+            <a href="mailto:skdanisht@gmail.com"
+                class="contact-item flex items-center p-4 rounded-lg bg-gray-900 border border-green-600/50 hover:bg-green-700/30">
+                <!-- Mail Icon (lucide-react style) -->
+                <svg class="w-8 h-8 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 8l7.89 5.26c.33.22.68.34 1.03.34.35 0 .7-.12 1.03-.34L21 8m-17 10V6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                </svg>
+                <div>
+                    <p class="text-sm text-gray-400 font-semibold">Email</p>
+                    <p class="text-lg font-mono text-white break-all">skdanisht@gmail.com</p>
+                </div>
+            </a>
+
+            <!-- Contact Item: Instagram -->
+            <a href="https://www.instagram.com/skdanisht" target="_blank" rel="noopener noreferrer"
+                class="contact-item flex items-center p-4 rounded-lg bg-gray-900 border border-pink-600/50 hover:bg-pink-700/30">
+                <!-- Instagram Icon (Inline SVG for custom look) -->
+                <svg class="w-8 h-8 text-pink-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 8a4 4 0 01-4 4H8a4 4 0 110-8h4a4 4 0 014 4zM12 12m-3 0a3 3 0 106 0 3 3 0 00-6 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 8a4 4 0 01-4-4v0a4 4 0 014 4zM16 8v0h0" />
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="2" />
+                </svg>
+                <div>
+                    <p class="text-sm text-gray-400 font-semibold">Instagram</p>
+                    <p class="text-lg font-mono text-white truncate">@skdanisht</p>
+                </div>
+            </a>
+
+            <!-- Contact Item: Soundcloud -->
+            <a href="https://www.soundcloud.com/skdanisht" target="_blank" rel="noopener noreferrer"
+                class="contact-item flex items-center p-4 rounded-lg bg-gray-900 border border-orange-600/50 hover:bg-orange-700/30">
+                <!-- Soundcloud Icon (Custom Waves) -->
+                <svg class="w-8 h-8 text-orange-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 18V6M7 15V9M17 15V9M21 12h-2M3 12h2" />
+                </svg>
+                <div>
+                    <p class="text-sm text-gray-400 font-semibold">Soundcloud</p>
+                    <p class="text-lg font-mono text-white truncate">/skdanisht</p>
+                </div>
+            </a>
+
+            <!-- Contact Item: Linktree -->
+            <a href="https://linktr.ee/skdanisht" target="_blank" rel="noopener noreferrer"
+                class="contact-item flex items-center p-4 rounded-lg bg-gray-900 border border-blue-600/50 hover:bg-blue-700/30">
+                <!-- Link Icon (Linktree is a collection of links) -->
+                <svg class="w-8 h-8 text-blue-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.102a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+                <div>
+                    <p class="text-sm text-gray-400 font-semibold">All Links</p>
+                    <p class="text-lg font-mono text-white truncate">Linktree</p>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Blue Door Easter Egg -->
+    <div class="flex justify-center py-20 bg-[#0d1117]">
+        <div id="blue-door-egg" class="w-24 h-24 p-6 bg-gray-900/50 rounded-xl shadow-2xl blue-door-svg"
+            title="Click to find the real meaning.">
+            <!-- SVG is larger and centered -->
+            <svg id="door-icon" class="w-full h-full text-blue-400" fill="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer Frame -->
+                <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="#60a5fa" stroke-width="1.5" />
+                <!-- Door Panel (fills the frame) -->
+                <rect x="4" y="4" width="16" height="16" rx="1" fill="#1e3a8a" />
+                <!-- Door Panel Detail -->
+                <rect x="5.5" y="5.5" width="13" height="13" rx="0.5" fill="#2563eb" opacity="0.8" />
+                <!-- Door Knobs (positioned on the right side of the panel, as if hinged left) -->
+                <circle cx="16" cy="12" r="1.5" fill="#fcd34d" />
+                <circle cx="16" cy="12" r="0.5" fill="#92400e" />
+                <!-- Hinge line on the left -->
+                <rect x="3.8" y="4" width="0.4" height="16" fill="#60a5fa" />
+            </svg>
+        </div>
+    </div>
+
+
+    <script>
+        // --- JavaScript for Dynamic and Animated Features ---
+
+        // 1. Footer Year Update
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 2. Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 3. Scroll Animation for Lyrics
+        const lyricLines = document.querySelectorAll('.lyric-line');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Drastically reduced the delay to 5ms for a much faster cascade
+                    const index = Array.from(lyricLines).indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 5);
+
+                    // Stop observing once it's visible to save performance
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        lyricLines.forEach(line => {
+            observer.observe(line);
+        });
+
+        // 4. Smooth Scrolling for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu after clicking a link
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // 5. Blue Door Click Listener (Custom Animation and Message)
+        const blueDoorContainer = document.getElementById('blue-door-egg');
+
+        blueDoorContainer.addEventListener('click', () => {
+            // Prevent multiple rapid clicks
+            if (blueDoorContainer.classList.contains('door-opening')) return;
+            blueDoorContainer.classList.add('door-opening');
+
+            // 5a. Apply the 'open' animation
+            blueDoorContainer.classList.add('door-open');
+
+            // 5b. Create and display the custom message
+            const messageText = "Behind every Blue Door, Find the man you are. And kill the man who you aren't";
+            const messageBox = document.createElement('div');
+            messageBox.innerHTML = `<span class="title-font font-bold text-blue-400 text-3xl block mb-2">The Secret:</span>${messageText}`;
+            messageBox.className = "door-message";
+            document.body.appendChild(messageBox);
+
+            // Show message box after a slight delay (when door is "half-open")
+            setTimeout(() => {
+                messageBox.classList.add('show');
+            }, 500); // 500ms into the 1.5s door open animation
+
+            // 5c. Set a timeout to reset the door and hide the message
+            setTimeout(() => {
+                // Hide message
+                messageBox.classList.remove('show');
+
+                // Reset door animation
+                setTimeout(() => {
+                    blueDoorContainer.classList.remove('door-open');
+                    blueDoorContainer.classList.remove('door-opening');
+                    messageBox.remove();
+                }, 500); // Wait for message fade out
+
+            }, 6000); // Message displayed for 5.5 seconds (6000 - 500)
+        });
+
+        // 6. Konami Code Listener (Easter Egg)
+        const konamiCode = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'b', 'a'
+        ];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            // Convert key to lowercase to handle 'b' and 'a' correctly
+            const key = e.key.toLowerCase();
+
+            if (konamiCode[konamiIndex] && key === konamiCode[konamiIndex].toLowerCase()) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    konamiIndex = 0; // Reset index
+
+                    const lyricContainer = document.getElementById('lyric-container');
+
+                    // Show activation message
+                    const message = document.createElement('div');
+                    message.textContent = "KONAMI MODE ACTIVATED: You found the cheat code!";
+                    message.className = "fixed top-20 left-1/2 -translate-x-1/2 bg-yellow-600 text-white font-bold p-3 rounded-lg shadow-2xl z-[100] transition duration-500 ease-in-out transform scale-100";
+                    document.body.appendChild(message);
+
+                    // Apply a noticeable effect to the lyric container
+                    lyricContainer.classList.add('border-4', 'border-yellow-400', 'p-4', 'shadow-yellow-500/50', 'shadow-xl', 'animate-pulse');
+
+                    // Add a simple CSS animation for pulse
+                    const styleSheet = document.createElement("style");
+                    styleSheet.type = "text/css";
+                    styleSheet.innerText = "@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } } .animate-pulse { animation: pulse 1s infinite; }";
+                    document.head.appendChild(styleSheet);
+
+
+                    // Remove the message and effect after a few seconds
+                    setTimeout(() => {
+                        message.classList.remove('scale-100');
+                        message.classList.add('scale-0', 'opacity-0');
+                    }, 3000);
+                    setTimeout(() => {
+                        message.remove();
+                        lyricContainer.classList.remove('border-4', 'border-yellow-400', 'p-4', 'shadow-yellow-500/50', 'shadow-xl', 'animate-pulse');
+                        // Attempt to remove the dynamically created style sheet if it exists
+                        if (document.head.contains(styleSheet)) {
+                            document.head.removeChild(styleSheet);
+                        }
+                    }, 3500);
+                }
+            } else {
+                // If the wrong key is pressed, reset the sequence
+                konamiIndex = 0;
+            }
+        });
+
+    </script>
+</body>
+
+</html>
